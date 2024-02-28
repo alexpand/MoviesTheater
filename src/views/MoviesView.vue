@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMoviesService } from '@/services/movies'
+import { useMoviesService } from '@/composables/services'
 import { ref, onMounted } from 'vue'
 
 const { getMovies } = useMoviesService()

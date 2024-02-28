@@ -2,7 +2,7 @@ const env = { ...import.meta.env }
 const api_token = env.VITE_API_TOKEN
 const api_url = env.VITE_API_URL
 
-export function useUrlHandler() {
+export default function useUrlHandler() {
     const headers = {
         headers: { 
             Authorization: `Bearer ${api_token}`, 
