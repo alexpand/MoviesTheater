@@ -1,20 +1,19 @@
 <script setup lang="ts">
 import { useMoviesService } from '@/services/movies'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const { getMovies } = useMoviesService()
 
 const movies = ref <any>([])
 
-async function dummy() {
+onMounted( async () => {
     const result = await getMovies()
 
     if(result && result.results) {
         movies.value = result.results
     }
-}
+})
 
-dummy()
 </script>
 <template>
     <section class="container grid grid-cols-4 gap-6">
