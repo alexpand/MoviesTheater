@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import type { MovieService, apiMovieType } from '@/types/types'
+import type { MovieService, apiMovieType, apiGenreType } from '@/types/types'
 import { useUrlHandler } from '@/composables/utils'
 
 const params = '?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'
@@ -7,12 +7,18 @@ const params = '?include_adult=false&include_video=false&language=en-US&page=1&s
 export default function useMoviesService(): MovieService {
     const { headers, buildUrl } = useUrlHandler()
     const movies = ref<apiMovieType>()
+    const genres = ref<apiGenreType>()
     // methods
     // async function getDetails(id: string) {
     //     const response = await fetch(buildUrl() + id, { headers: { Authorization: `Bearer ${api_token}`, accept: 'application/json'}} )
     //     const details = await response.json()
     //     console.log(details.title, ' movie')
     // }
+
+    async function getGenres(): Promise<void> {
+        const response = await fetch(buildUrl('/movie/list', '/genre') + params, headers )
+        genres.value = await response.json()
+    }
 
     async function getMovies(): Promise<void> {
         const response = await fetch(buildUrl('/movie', '/discover') + params, headers )
@@ -21,7 +27,9 @@ export default function useMoviesService(): MovieService {
 
     return { 
         // getDetails,
+        genres,
         movies,
-        getMovies
+        getMovies,
+        getGenres
     }
 }

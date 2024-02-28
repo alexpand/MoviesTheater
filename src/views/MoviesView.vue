@@ -2,10 +2,11 @@
 import { useMoviesService } from '@/composables/services'
 import { onMounted } from 'vue'
 
-const { getMovies, movies } = useMoviesService()
+const { getMovies, movies, genres, getGenres } = useMoviesService()
 
 onMounted( async () => {
     await getMovies()
+    await getGenres()
 })
 
 </script>
@@ -20,5 +21,6 @@ onMounted( async () => {
             <hr>
             <p class="text-2xl text-center text-clip">{{ movie.title }}</p>
         </article>
+        <pre>{{ genres }}</pre>
     </section>
 </template>

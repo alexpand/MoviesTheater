@@ -24,7 +24,18 @@ export interface Movie {
     vote_count: number 
 }
 
+export interface apiGenreType {
+    genres: [Genre]
+}
+
+export interface Genre {
+    id: number
+    name: string
+}
+
 export interface MovieService { 
     movies: Ref<apiMovieType | undefined>
+    genres: Ref<apiGenreType | undefined>
     getMovies: () => Promise<void>
+    getGenres: () => Promise<void>
 }
