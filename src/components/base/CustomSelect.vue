@@ -1,19 +1,18 @@
 <script setup lang="ts">
 const emit = defineEmits(['onToggleOption'])
 
-// import { useSessionStore } from '@/stores/session'
-defineProps< { 
+const props = defineProps< { 
     options: Array <any>
-    label: string
+    selectedOptions: Array <string>
 }>()
 
-// const { updateGenre, containsGenre } = useSessionStore()
-
 function toggleOption(id: string) {
-    // updateGenre(id)
+    emit('onToggleOption', id)
 }
 
-
+function isSelected(id: string) {
+    return props.selectedOptions.includes(id)
+}
 
 </script>
 <template>
@@ -23,9 +22,8 @@ function toggleOption(id: string) {
             :key="option.id"
             @click="toggleOption(option.id)"
             class="text-center mx-4 my-1 px-6 py-2 rounded-md cursor-pointer hover:bg-red-200 hover:text-black"
-            
+            :class="isSelected(option.id) ? 'bg-blue-500' : 'bg-red-800'"
         >
-        <!-- :class="containsGenre(option.id) ? 'bg-blue-500' : 'bg-red-800'" -->
             {{ option.name }}
         </li>
     </ul>

@@ -11,6 +11,10 @@ const { getMovies, movies, genres, getGenres } = useMoviesService()
 
 const sessionStore = useSessionStore()
 
+function onToggleOption(id: string) {
+    sessionStore.updateGenre(id)
+}
+
 onMounted( async () => {
     await getMovies()
     await getGenres()
@@ -25,11 +29,12 @@ watch(sessionStore, () => {
     <section>
         <CustomSelect 
             :options="genres?.genres" 
-            label="Genre list"
+            :selectedOptions="sessionStore.genres"
+            @onToggleOption="onToggleOption"
         /> 
-            <p>genero seleccionado {{ sessionStore.genres.toString() }}</p>
+        <p>genero seleccionado {{ sessionStore.genres.toString() }}</p>
     </section>
-    <section class="container grid grid-cols-4 gap-6">
+    <section class="container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <article
             class="movie-item rounded-xl border-2 p-4 flex items-center flex-col cursor-pointer" 
             v-for="movie in movies?.results" 
