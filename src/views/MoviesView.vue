@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 
 import { useSessionStore } from '@/stores/session'
 
@@ -16,10 +16,18 @@ onMounted( async () => {
     await getGenres()
 })
 
+watch(sessionStore, () => {
+    getMovies()
+})
+
 </script>
 <template>
     <section>
-        <CustomSelect :options="genres?.genres" label="Genre list" /> <p>genero seleccionado {{ sessionStore.genre }}</p>
+        <CustomSelect 
+            :options="genres?.genres" 
+            label="Genre list"
+        /> 
+            <p>genero seleccionado {{ sessionStore.genres.toString() }}</p>
     </section>
     <section class="container grid grid-cols-4 gap-6">
         <article
