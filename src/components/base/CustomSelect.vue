@@ -7,8 +7,7 @@ defineProps< {
 
 const { setGenre } = useSessionStore()
 
-function updateOption(evt) {
-    console.log(`${evt.target.value}`, 'evento')
+function updateOption(evt: any) {
     setGenre(`${evt.target.value}`)
 }
 

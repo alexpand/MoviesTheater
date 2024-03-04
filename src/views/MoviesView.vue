@@ -9,7 +9,7 @@ import CustomSelect from '@/components/base/CustomSelect.vue'
 
 const { getMovies, movies, genres, getGenres } = useMoviesService()
 
-const { currentGenre, genre } = useSessionStore()
+const sessionStore = useSessionStore()
 
 onMounted( async () => {
     await getMovies()
@@ -19,7 +19,7 @@ onMounted( async () => {
 </script>
 <template>
     <section>
-        <CustomSelect :options="genres?.genres" label="Genre list" /> <p>genero seleccionado {{ currentGenre }} || {{ genre }}</p>
+        <CustomSelect :options="genres?.genres" label="Genre list" /> <p>genero seleccionado {{ sessionStore.genre }}</p>
     </section>
     <section class="container grid grid-cols-4 gap-6">
         <article
