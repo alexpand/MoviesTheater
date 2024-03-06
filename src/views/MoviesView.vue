@@ -39,9 +39,11 @@ watch(sessionStore, () => {
             v-for="movie in movies?.results" 
             :key="movie.id"
         >
-            <img :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" :alt="movie.title">
-            <hr>
-            <p class="text-2xl text-center text-clip">{{ movie.title }}</p>
+            <router-link :to="`/movie/${movie.id}`">
+                <img :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" :alt="movie.title">
+                <hr>
+                <p class="text-2xl text-center text-clip">{{ movie.title }}</p>
+            </router-link>
         </article>
     </section>
 </template>
