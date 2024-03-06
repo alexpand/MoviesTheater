@@ -31,6 +31,13 @@ export interface apiGenreType {
 export interface Genre {
     id: number
     name: string
+    isActive: boolean
+}
+
+export interface SelectItem {
+    id: number
+    name: string
+    isActive: boolean
 }
 
 export interface MovieService { 

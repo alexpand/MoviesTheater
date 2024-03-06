@@ -7,17 +7,17 @@ import { useMoviesService } from '@/composables/services'
 
 import CustomSelect from '@/components/base/CustomSelect.vue'
 
-const { getMovies, movies, genres, getGenres } = useMoviesService()
+const { getMovies, movies } = useMoviesService()
 
 const sessionStore = useSessionStore()
 
-function onToggleOption(id: string) {
-    sessionStore.updateGenre(id)
+function onToggleOption(id: number) {
+    sessionStore.toggleGenre(id)
 }
 
 onMounted( async () => {
     await getMovies()
-    await getGenres()
+    sessionStore.fetchGenres()
 })
 
 watch(sessionStore, () => {
@@ -28,11 +28,10 @@ watch(sessionStore, () => {
 <template>
     <section>
         <CustomSelect 
-            :options="genres?.genres" 
-            :selectedOptions="sessionStore.genres"
+            :options="sessionStore.genres" 
             @onToggleOption="onToggleOption"
         /> 
-        <p>genero seleccionado {{ sessionStore.genres.toString() }}</p>
+        <p>genero seleccionado {{ sessionStore.genresList.toString() }}</p>
     </section>
     <section class="container grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <article

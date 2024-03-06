@@ -12,6 +12,7 @@ export default function useMoviesService(): MovieService {
 
     const sessionStore = useSessionStore()
     // methods
+    
     // async function getDetails(id: string) {
     //     const response = await fetch(buildUrl() + id, { headers: { Authorization: `Bearer ${api_token}`, accept: 'application/json'}} )
     //     const details = await response.json()
@@ -24,7 +25,7 @@ export default function useMoviesService(): MovieService {
     }
     
     async function getMovies(): Promise<void> {
-        const response = await fetch(buildUrl('/movie', '/discover') + params + `&with_genres=${sessionStore.genres.toString()}`, headers )
+        const response = await fetch(buildUrl('/movie', '/discover') + params + `&with_genres=${sessionStore.genresList}`, headers )
         movies.value = await response.json()
     }
 
