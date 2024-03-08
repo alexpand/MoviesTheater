@@ -4,10 +4,12 @@ import { onMounted, watch } from 'vue'
 import { useSessionStore } from '@/stores/session'
 
 import { useMoviesService } from '@/composables/services'
+import { useUrlHandler } from '@/composables/utils'
 
 import CustomSelect from '@/components/base/CustomSelect.vue'
 
 const { getMovies, movies } = useMoviesService()
+const { getPosterUrl } = useUrlHandler()
 
 const sessionStore = useSessionStore()
 
@@ -16,7 +18,6 @@ function onToggleOption(id: number) {
 }
 
 onMounted( async () => {
-    await getMovies()
     sessionStore.fetchGenres()
 })
 
@@ -40,7 +41,7 @@ watch(sessionStore, () => {
             :key="movie.id"
         >
             <router-link :to="`/movie/${movie.id}`">
-                <img :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" :alt="movie.title">
+                <img :src="getPosterUrl(movie.poster_path)" :alt="movie.title">
                 <hr>
                 <p class="text-2xl text-center text-clip">{{ movie.title }}</p>
             </router-link>

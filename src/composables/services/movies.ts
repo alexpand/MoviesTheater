@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import type { MovieService, apiMovieType, apiGenreType } from '@/types/types'
+import { type MovieService, type apiMovieType, type apiGenreType, type apiMovieDetailsType } from '@/types/types'
 import { useUrlHandler } from '@/composables/utils'
 import { useSessionStore } from '@/stores/session'
 
@@ -9,15 +9,16 @@ export default function useMoviesService(): MovieService {
     const { headers, buildUrl } = useUrlHandler()
     const movies = ref<apiMovieType>()
     const genres = ref<apiGenreType>()
+    const movie_details = ref<apiMovieDetailsType>()
 
     const sessionStore = useSessionStore()
+
     // methods
     
-    // async function getDetails(id: string) {
-    //     const response = await fetch(buildUrl() + id, { headers: { Authorization: `Bearer ${api_token}`, accept: 'application/json'}} )
-    //     const details = await response.json()
-    //     console.log(details.title, ' movie')
-    // }
+    async function getDetails(id: string): Promise<void> {
+        const response = await fetch(buildUrl(`/movie/${id}`) + '?append_to_response=videos%2Ccasts', headers )
+        movie_details.value = await response.json()
+    }
 
     async function getGenres(): Promise<void> {
         const response = await fetch(buildUrl('/movie/list', '/genre') + params, headers )
@@ -30,9 +31,10 @@ export default function useMoviesService(): MovieService {
     }
 
     return { 
-        // getDetails,
         genres,
         movies,
+        movie_details,
+        getDetails,
         getMovies,
         getGenres
     }
