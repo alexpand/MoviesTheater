@@ -8,20 +8,20 @@ export interface apiMovieType {
 }
 
 export interface Movie { 
-    adult: boolean 
-    backdrop_path: string 
+    adult: boolean
+    backdrop_path: string
     genre_ids: [number] 
     id: number
     original_language: string
     original_title: string
     overview: string 
-    popularity: number 
-    poster_path: string 
-    release_date: string 
-    title: string 
-    video: boolean 
-    vote_average: number 
-    vote_count: number 
+    popularity: number
+    poster_path: string
+    release_date: string
+    title: string
+    video: boolean
+    vote_average: number
+    vote_count: number
 }
 
 export interface apiGenreType {
@@ -31,12 +31,9 @@ export interface apiGenreType {
 export interface Genre {
     id: number
     name: string
-    isActive: boolean
 }
 
-export interface SelectItem {
-    id: number
-    name: string
+export interface SelectItem extends Genre {
     isActive: boolean
 }
 
