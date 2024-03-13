@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 
 import { useMoviesService } from '@/composables/services'
 import { useUrlHandler } from '@/composables/utils'
+import CastsScroller from '@/components/base/CastsScroller.vue'
 
 const id = useRoute().params.id
 
@@ -43,5 +44,6 @@ onMounted( async () => {
                 </router-link>
             </div>
         </article>
+        <CastsScroller :casts="movie_details?.casts?.cast" />
     </section>
 </template>
