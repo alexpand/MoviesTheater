@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useSessionStore } from '@/stores/session'
 import MoviesView from '@/views/MoviesView.vue'
 
 const router = createRouter({
@@ -22,6 +23,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
+      meta: { requiresAuth: false },
       component: () => import('@/views/LoginView.vue')
     },
     {
@@ -33,6 +35,16 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     }
   ]
+})
+
+router.beforeEach( (to, from, next) => {
+  const sessionStore = useSessionStore()
+  console.log(sessionStore.autenthicated, 'fuera if')
+  if(!sessionStore.autenthicated) {
+    next('/login')
+  }
+
+  next('/')
 })
 
 export default router
