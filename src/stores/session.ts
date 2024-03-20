@@ -6,7 +6,7 @@ import type { Genre } from '@/types/types'
 import { useMoviesService } from '@/composables/services'
 
 export const useSessionStore = defineStore('session', () => {
-    const autenthicated = ref<boolean>(false)
+    const authenticated = ref<boolean>(false)
 
     const genres = ref<Array <Genre> | undefined>([])
     const { getGenres, genres: apiGenres } = useMoviesService()
@@ -41,12 +41,12 @@ export const useSessionStore = defineStore('session', () => {
     }
 
     function login() {
-        autenthicated.value = true
+        authenticated.value = true
     }
 
     function logout() {
-        autenthicated.value = false
+        authenticated.value = false
     }
     
-    return { genres, genresList, fetchGenres, toggleGenre, login, logout, autenthicated }
+    return { genres, genresList, fetchGenres, toggleGenre, login, logout, authenticated }
   })

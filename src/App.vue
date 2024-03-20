@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 
+import { useSessionStore } from './stores/session'
+
 import MainHeader from '@/components/MainHeader.vue'
+
+const sessionStore = useSessionStore()
 
 </script>
 
 <template>
-  <MainHeader />
+  <MainHeader v-if="sessionStore.authenticated" />
 
   <main class="container mx-auto">
     <RouterView />

@@ -8,23 +8,34 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: MoviesView
+      component: MoviesView,
+      meta: {
+        requiresAuth: true
+      },
     },
     {
       path: '/movie/:id',
       name: 'movie',
-      component: () => import('@/views/MovieDetailsView.vue')
+      component: () => import('@/views/MovieDetailsView.vue'),
+      meta: {
+        requiresAuth: true
+      },
     },
     {
       path: '/casts/:id',
       name: 'cast',
-      component: () => import('@/views/CastDetailsView.vue')
+      component: () => import('@/views/CastDetailsView.vue'),
+      meta: {
+        requiresAuth: true
+      },
     },
     {
       path: '/login',
       name: 'login',
-      meta: { requiresAuth: false },
-      component: () => import('@/views/LoginView.vue')
+      component: () => import('@/views/LoginView.vue'),
+      meta: {
+        requiresAuth: false
+      }
     },
     {
       path: '/about',
@@ -32,19 +43,25 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/AboutView.vue'),
+      meta: {
+        requiresAuth: true
+      },
     }
   ]
 })
 
-router.beforeEach( (to, from, next) => {
-  const sessionStore = useSessionStore()
-  console.log(sessionStore.autenthicated, 'fuera if')
-  if(!sessionStore.autenthicated) {
-    next('/login')
-  }
+// Navigation guard redirects to login if user is not authenticated
 
-  next('/')
-})
+// router.beforeEach((to) => {
+//   const sessionStore = useSessionStore()
+
+//   if (to.meta.requiresAuth && !sessionStore.authenticated) {
+//     return {
+//       path: '/login',
+//       query: { redirect: to.fullPath }
+//     }
+//   }
+// })
 
 export default router

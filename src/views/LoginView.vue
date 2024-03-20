@@ -23,15 +23,15 @@ function onSubmit() {
 
 <template>
     <h1>Login</h1>
-    <div class="container mx-auto flex flex-col justify-center bg-white rounded-lg p-4">
+    <div class="container mx-auto">
         <Form  
-            class="text-black"
+            class="text-black text-lg flex flex-col justify-center bg-white rounded-lg p-4 gap-2 w-48 mx-auto"
             @submit="onSubmit"
             :validation-schema="userSchema"
         >
             <label for="email">Email:</label>
             <Field
-                class="bg-red"
+                class="bg-stone-100 rounded-md px-2 pb-1"
                 type="email"
                 name="email"
             />
@@ -39,13 +39,13 @@ function onSubmit() {
 
             <label for="password">Password:</label>
             <Field 
-                class="bg-red" 
+            class="bg-stone-100 rounded-md px-2 pb-1" 
                 type="password"
                 name="password"
             />
             <ErrorMessage name="password" />
 
-            <button>botón</button>
+            <button class="rounded-lg bg-stone-300 w-24 mx-auto px-2 py-1">Login</button>
         </Form>
     </div>
 </template>
