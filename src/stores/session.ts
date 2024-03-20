@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-import type { Genre } from '@/types/types'
+import type { Genre } from '@/types/globals'
 
 import { useMoviesService } from '@/composables/services'
 

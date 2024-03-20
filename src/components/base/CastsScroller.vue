@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import type { Cast } from '@/types/types'
+import type { Cast } from '@/types/casts'
 
 import { useUrlHandler } from '@/composables/utils'
 

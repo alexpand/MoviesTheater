@@ -1,4 +1,4 @@
-import type { Video } from '@/types/types'
+import type { Video } from '@/types/movies'
 
 export default function useDetailsHelper() {
 

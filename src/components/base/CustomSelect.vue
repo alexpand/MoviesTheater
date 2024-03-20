@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SelectItem } from '@/types/types';
+import type { SelectItem } from '@/types/globals';
 
 const emit = defineEmits(['onToggleOption'])
 

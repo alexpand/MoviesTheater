@@ -1,5 +1,6 @@
 import { ref } from 'vue'
-import { type MovieService, type apiMovieType, type apiGenreType, type apiMovieDetailsType } from '@/types/types'
+import { type MovieService, type apiMovieType, type apiMovieDetailsType } from '@/types/movies'
+import { type apiGenreType } from '@/types/globals'
 import { useUrlHandler } from '@/composables/utils'
 import { useSessionStore } from '@/stores/session'
 
