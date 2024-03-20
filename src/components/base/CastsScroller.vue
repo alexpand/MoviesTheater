@@ -23,10 +23,11 @@ defineProps< {
             :key="`cast-${cast.id}`"
         >
             <router-link :to="`/casts/${cast.id}`" class="w-full">
-                <img
-                    :src="getPosterUrl(cast.profile_path, 'w138_and_h175_face')" 
-                    :alt="cast.name"
-                    class="w-full rounded-xl"
+                <img 
+                    class="w-full rounded-xl defaultImg" 
+                    :src="getPosterUrl(cast.profile_path, 'w138_and_h175_face')"  
+                    :alt="cast.name" 
+                    onerror="this.src='/public/default_profile.png'"
                 >
                 <hr>
                 <p class="text-sm text-center text-clip text-ellipsis">{{ cast.name }}</p>
@@ -35,3 +36,12 @@ defineProps< {
         </div>
     </article>
 </template>
+
+<style>
+
+.defaultImg {
+    width: 156px;
+    height: 197.82px;
+}
+
+</style>
