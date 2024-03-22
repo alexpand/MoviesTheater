@@ -1,7 +1,5 @@
 import type { Ref } from 'vue'
 
-import type { Job } from './casts'
-
 // Location types
 
 export interface Company {
@@ -38,6 +36,6 @@ export interface SelectItem extends Genre {
 }
 
 export interface ConfigurationService {
-  departments: Ref<[Job] | undefined>
+  departments: Ref<[string] | undefined>
   getDepartments: () => Promise<void>
 }
