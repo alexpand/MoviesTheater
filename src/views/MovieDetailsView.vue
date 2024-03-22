@@ -6,9 +6,13 @@ import { useMoviesService } from '@/composables/services'
 import { useUrlHandler } from '@/composables/utils'
 import { useDetailsHelper } from '@/composables/utils'
 
+import { useSessionStore } from '@/stores/session'
+
 import CastsScroller from '@/components/base/CastsScroller.vue'
 
 const id = useRoute().params.id
+
+const { setCasts } = useSessionStore()
 
 const { getDetails, movie_details } = useMoviesService()
 const { getPosterUrl } = useUrlHandler()
@@ -45,5 +49,8 @@ onMounted( async () => {
             </div>
         </article>
         <CastsScroller :casts="movie_details?.casts?.cast" />
+        <button @click="setCasts(movie_details.casts)">
+            <router-link :to="`/movie/cast/${id}`">See full cast</router-link>
+        </button>
     </section>
 </template>

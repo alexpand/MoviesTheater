@@ -2,12 +2,39 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 import type { Genre } from '@/types/globals'
+import type { Employees, Employee, Crew, Cast, Casts } from '@/types/casts'
 
 import { useMoviesService } from '@/composables/services'
 
 export const useSessionStore = defineStore('session', () => {
-    const authenticated = ref<boolean>(false)
 
+    //Casts
+    const castsList = ref<Employees | undefined>()
+
+    function setCasts(casts: Casts) {
+        const cast: [Employee] = casts.cast.map( (cast: Cast) => {
+            return {
+                name: cast.name,
+                avatar: cast.profile_path,
+                role: cast.character,
+            }
+        }) as [Employee]
+
+        const crew = casts.crew.map( (crew: Crew) => {
+            return {
+                name: crew.name,
+                avatar: crew.profile_path,
+                role: crew.job,
+            }
+        }) as [Employee]
+
+        castsList.value = {
+            cast,
+            crew,
+        }
+    }
+
+    //Genre
     const genres = ref<Array <Genre> | undefined>([])
     const { getGenres, genres: apiGenres } = useMoviesService()
     const genresList = computed(() => {
@@ -15,7 +42,6 @@ export const useSessionStore = defineStore('session', () => {
         genres.value.filter((genre) => genre.isActive ).map( (genre) => genre.id ).toString() :
         ""
     })
-
 
     async function fetchGenres() {
         await getGenres()
@@ -40,6 +66,9 @@ export const useSessionStore = defineStore('session', () => {
         // })
     }
 
+    //Login
+    const authenticated = ref<boolean>(false)
+
     function login() {
         authenticated.value = true
     }
@@ -48,5 +77,5 @@ export const useSessionStore = defineStore('session', () => {
         authenticated.value = false
     }
     
-    return { genres, genresList, fetchGenres, toggleGenre, login, logout, authenticated }
+    return { castsList, setCasts, genres, genresList, fetchGenres, toggleGenre, login, logout, authenticated }
   })

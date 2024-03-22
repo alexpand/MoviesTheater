@@ -36,3 +36,14 @@ export interface Job {
   department: string
   jobs: [string] | null
 }
+
+export interface Employee {
+  role: string
+  name: string
+  avatar: string
+}
+
+export interface Employees {
+  cast: [Employee]
+  crew: [Employee]
+}
