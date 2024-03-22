@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useSessionStore } from '@/stores/session'
+// import { useSessionStore } from '@/stores/session'
 import MoviesView from '@/views/MoviesView.vue'
 
 const router = createRouter({
@@ -22,9 +22,17 @@ const router = createRouter({
       },
     },
     {
-      path: '/casts/:id',
+      path: '/movie/cast/:id',
       name: 'cast',
       component: () => import('@/views/CastDetailsView.vue'),
+      meta: {
+        requiresAuth: true
+      },
+    },
+    {
+      path: '/person/:id',
+      name: 'person',
+      component: () => import('@/views/PersonDetailsView.vue'),
       meta: {
         requiresAuth: true
       },
