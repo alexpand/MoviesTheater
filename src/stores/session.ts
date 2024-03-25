@@ -25,6 +25,7 @@ export const useSessionStore = defineStore('session', () => {
                 name: crew.name,
                 avatar: crew.profile_path,
                 role: crew.job,
+                department: crew.department,
             }
         }) as [Employee]
 

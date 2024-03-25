@@ -41,6 +41,7 @@ export interface Employee {
   role: string
   name: string
   avatar: string
+  department?: string
 }
 
 export interface Employees {
