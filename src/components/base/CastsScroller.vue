@@ -22,7 +22,7 @@ defineProps< {
             v-for="cast in casts" 
             :key="`cast-${cast.id}`"
         >
-            <router-link :to="`/casts/${cast.id}`" class="w-full">
+            <router-link :to="`/person/${cast.id}`" class="w-full">
                 <img 
                     class="w-full rounded-xl defaultImg" 
                     :src="getPosterUrl(cast.profile_path, 'w138_and_h175_face')"  
