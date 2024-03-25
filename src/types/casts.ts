@@ -87,7 +87,7 @@ export interface apiPersonType {
   credits: Credits
 }
 
-export interface PeopleService { 
+export interface PeopleService {
   person: Ref<apiPersonType | undefined>
   getPerson: (id: string) => Promise<void>
 }

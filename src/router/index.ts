@@ -11,7 +11,7 @@ const router = createRouter({
       component: MoviesView,
       meta: {
         requiresAuth: true
-      },
+      }
     },
     {
       path: '/movie/:id',
@@ -19,7 +19,7 @@ const router = createRouter({
       component: () => import('@/views/MovieDetailsView.vue'),
       meta: {
         requiresAuth: true
-      },
+      }
     },
     {
       path: '/movie/cast/:id',
@@ -27,7 +27,7 @@ const router = createRouter({
       component: () => import('@/views/CastDetailsView.vue'),
       meta: {
         requiresAuth: true
-      },
+      }
     },
     {
       path: '/person/:id',
@@ -35,7 +35,7 @@ const router = createRouter({
       component: () => import('@/views/PersonDetailsView.vue'),
       meta: {
         requiresAuth: true
-      },
+      }
     },
     {
       path: '/login',
@@ -54,7 +54,7 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
       meta: {
         requiresAuth: true
-      },
+      }
     }
   ]
 })

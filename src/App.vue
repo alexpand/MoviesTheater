@@ -6,7 +6,6 @@ import { useSessionStore } from './stores/session'
 import MainHeader from '@/components/MainHeader.vue'
 
 const sessionStore = useSessionStore()
-
 </script>
 
 <template>
