@@ -1,23 +1,19 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView } from 'vue-router'
+
+import { useSessionStore } from './stores/session'
+
+import MainHeader from '@/components/MainHeader.vue'
+
+const sessionStore = useSessionStore()
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <MainHeader v-if="sessionStore.authenticated" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <main class="container mx-auto">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
