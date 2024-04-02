@@ -27,10 +27,14 @@ onMounted(async () => {
 <template>
   <section>
     <article class="flex gap-4 p-4">
-      <img
-        :src="getPosterUrl(`${movie_details?.poster_path}`)"
-        :alt="`Movie: ${movie_details?.title}`"
-      />
+      <div class="w-96 flex justify-center">
+        <img
+          :src="getPosterUrl(`${movie_details?.poster_path}`)"
+          :alt="`Movie: ${movie_details?.title}`"
+          :class="{'w-24': !movie_details?.poster_path}"
+          onerror="this.src='/broken_img.svg'"
+        />
+      </div>
       <div>
         <div class="flex">
           <h1>{{ movie_details?.title }}</h1>
