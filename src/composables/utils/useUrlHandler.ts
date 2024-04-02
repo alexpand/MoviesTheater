@@ -15,7 +15,7 @@ export default function useUrlHandler() {
     return api_url + prefix + domain
   }
 
-  function getPosterUrl(posterPath: string, size: string | null) {
+  function getPosterUrl(posterPath: string, size?: string | null) {
     return `${api_poster_url}/${size || 'w342'}${posterPath}`
   }
 

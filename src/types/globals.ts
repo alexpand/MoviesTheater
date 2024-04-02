@@ -29,6 +29,7 @@ export interface apiGenreType {
 export interface Genre {
   id: number
   name: string
+  isActive: boolean
 }
 
 export interface SelectItem extends Genre {

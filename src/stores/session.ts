@@ -10,32 +10,34 @@ export const useSessionStore = defineStore('session', () => {
   //Casts
   const castsList = ref<Employees | undefined>()
 
-  function setCasts(casts: Casts) {
-    const cast: [Employee] = casts.cast.map((cast: Cast) => {
-      return {
-        name: cast.name,
-        avatar: cast.profile_path,
-        role: cast.character
+  function setCasts(casts: Casts | undefined) {
+    if(casts) {
+      const cast: [Employee] = casts.cast.map((cast: Cast) => {
+        return {
+          name: cast.name,
+          avatar: cast.profile_path,
+          role: cast.character
+        }
+      }) as [Employee]
+  
+      const crew = casts.crew.map((crew: Crew) => {
+        return {
+          name: crew.name,
+          avatar: crew.profile_path,
+          role: crew.job,
+          department: crew.department
+        }
+      }) as [Employee]
+  
+      castsList.value = {
+        cast,
+        crew
       }
-    }) as [Employee]
-
-    const crew = casts.crew.map((crew: Crew) => {
-      return {
-        name: crew.name,
-        avatar: crew.profile_path,
-        role: crew.job,
-        department: crew.department
-      }
-    }) as [Employee]
-
-    castsList.value = {
-      cast,
-      crew
     }
   }
 
   //Genre
-  const genres = ref<Array<Genre> | undefined>([])
+  const genres = ref<Array<Genre>>([])
   const { getGenres, genres: apiGenres } = useMoviesService()
   const genresList = computed(() => {
     return genres.value
@@ -51,7 +53,7 @@ export const useSessionStore = defineStore('session', () => {
     genres.value = apiGenres?.value?.genres.map((genre) => ({
       ...genre,
       isActive: false
-    }))
+    })) as [Genre]
   }
 
   function toggleGenre(id: number) {
