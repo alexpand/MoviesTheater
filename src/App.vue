@@ -11,7 +11,7 @@ const sessionStore = useSessionStore()
 <template>
   <MainHeader v-if="sessionStore.authenticated" />
 
-  <main class="container mx-auto">
+  <main class="container mx-auto p-4">
     <RouterView />
   </main>
 </template>
