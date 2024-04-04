@@ -55,9 +55,13 @@ onMounted(async () => {
         </div>
       </div>
     </article>
-    <CastsScroller :casts="movie_details?.casts?.cast" />
-    <button @click="setCasts(movie_details?.casts)">
-      <router-link :to="`/movie/cast/${id}`">See full cast</router-link>
-    </button>
+    <CastsScroller :casts="movie_details?.casts?.cast">
+      <router-link :to="`/movie/cast/${id}`" class="block w-full h-full">
+        <button @click="setCasts(movie_details?.casts)" class="block w-full h-full">
+          See full cast
+          <img class="w-8 h-8 mx-auto" src="/arrow.svg">
+        </button>
+      </router-link>      
+    </CastsScroller>
   </section>
 </template>
