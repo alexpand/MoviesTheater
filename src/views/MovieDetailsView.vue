@@ -59,7 +59,7 @@ onMounted(async () => {
       <router-link :to="`/movie/cast/${id}`" class="block w-full h-full">
         <button @click="setCasts(movie_details?.casts)" class="block w-full h-full">
           See full cast
-          <img class="w-8 h-8 mx-auto" src="/public/arrow.svg">
+          <img class="w-8 h-8 mx-auto" src="/arrow.svg">
         </button>
       </router-link>      
     </CastsScroller>
