@@ -26,9 +26,11 @@ watch(sessionStore, () => {
 })
 </script>
 <template>
-  <section class="mb-4">
+  <section class="mb-4 hidden sm:block">
     <CustomSelect :options="sessionStore.genres" @onToggleOption="onToggleOption" />
   </section>
+
+  <CustomSelectMobile :options="sessionStore.genres" />
 
   <section class="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
     <article 
