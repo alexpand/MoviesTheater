@@ -72,7 +72,7 @@ export const useSessionStore = defineStore('session', () => {
   }
 
   //Login
-  const authenticated = ref<boolean>(false)
+  const authenticated = ref<boolean>(true)
 
   function login() {
     authenticated.value = true
