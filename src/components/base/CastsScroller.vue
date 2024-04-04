@@ -31,5 +31,8 @@ defineProps<{
         </div>
       </router-link>
     </div>
+    <div class="movie-item flex items-center justify-center rounded-lg bg-red-800 cursor-pointer hover:bg-red-100 hover:text-black hover:invert hover:contrast-50 w-40 min-w-40">
+      <slot></slot>
+    </div>
   </article>
 </template>
