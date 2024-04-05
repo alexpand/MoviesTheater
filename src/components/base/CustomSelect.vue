@@ -8,8 +8,9 @@ defineProps<{
 }>()
 
 function toggleOption(id: number) {
-  emit('onToggleOption', id)
+  emit('onToggleOption', id, true)
 }
+
 </script>
 <template>
   <ul class="flex justify-center flex-wrap">

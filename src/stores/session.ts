@@ -39,6 +39,7 @@ export const useSessionStore = defineStore('session', () => {
   //Genre
   const genres = ref<Array<Genre>>([])
   const { getGenres, genres: apiGenres } = useMoviesService()
+  const startFetch = ref(false)
   const genresList = computed(() => {
     return genres.value
       ? genres.value
@@ -54,6 +55,10 @@ export const useSessionStore = defineStore('session', () => {
       ...genre,
       isActive: false
     })) as [Genre]
+  }
+
+  function toggleFetch() {
+    startFetch.value = !startFetch.value
   }
 
   function toggleGenre(id: number) {
@@ -87,8 +92,10 @@ export const useSessionStore = defineStore('session', () => {
     setCasts,
     genres,
     genresList,
+    startFetch,
     fetchGenres,
     toggleGenre,
+    toggleFetch,
     login,
     logout,
     authenticated
