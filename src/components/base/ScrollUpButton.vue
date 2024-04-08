@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 
-function scrollUp() {
-  
-}
+import { useGlobalHelper } from '@/composables/utils'
+
+const { scrollUp } = useGlobalHelper()
 
 </script>
 

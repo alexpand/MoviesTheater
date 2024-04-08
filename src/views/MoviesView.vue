@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia'
 
 import { useMoviesService } from '@/composables/services'
 import { useUrlHandler } from '@/composables/utils'
+import { useGlobalHelper } from '@/composables/utils'
 
 import CustomSelect from '@/components/base/CustomSelect.vue'
 import CustomSelectMobile from '@/components/base/CustomSelectMobile.vue'
@@ -15,6 +16,8 @@ const { getMovies, movies } = useMoviesService()
 const { getPosterUrl } = useUrlHandler()
 
 const sessionStore = useSessionStore()
+
+const { scrollUp } = useGlobalHelper()
 
 const { startFetch, genres } = storeToRefs(sessionStore)
 
@@ -38,6 +41,7 @@ watch(startFetch, () => {
   if(startFetch.value) {
     getMovies()
     sessionStore.toggleFetch()
+    scrollUp()
   }
 })
 </script>
