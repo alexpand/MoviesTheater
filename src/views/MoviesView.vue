@@ -1,36 +1,80 @@
 <script setup lang="ts">
-import { onMounted, watch } from 'vue'
+import { onMounted, watch, ref } from 'vue'
 
 import { useSessionStore } from '@/stores/session'
+import { storeToRefs } from 'pinia'
+
+import { useIntersectionObserver } from '@vueuse/core'
 
 import { useMoviesService } from '@/composables/services'
 import { useUrlHandler } from '@/composables/utils'
+import { useGlobalHelper } from '@/composables/utils'
 
 import CustomSelect from '@/components/base/CustomSelect.vue'
+import CustomSelectMobile from '@/components/base/CustomSelectMobile.vue'
+import ScrollUpButton from '@/components/base/ScrollUpButton.vue'
 
 const { getMovies, movies } = useMoviesService()
 const { getPosterUrl } = useUrlHandler()
 
 const sessionStore = useSessionStore()
 
-function onToggleOption(id: number) {
+const { scrollUp } = useGlobalHelper()
+
+const { startFetch, genres } = storeToRefs(sessionStore)
+
+const pageCounter = ref(1)
+const scrollDetector = ref(null)
+
+const { stop } = useIntersectionObserver(
+  scrollDetector,
+  ([{ isIntersecting }], observerElement) => {
+    if(isIntersecting) {
+      pageCounter.value += 1
+      getMovies(pageCounter.value)
+      scrollUp()
+    }
+  },
+)
+
+function onToggleOption(id: number, toggleFetch: boolean) {
   sessionStore.toggleGenre(id)
+  if(toggleFetch) {
+    sessionStore.toggleFetch()
+  }
+}
+
+function onApplyFilter() {
+  sessionStore.toggleFetch()
+  pageCounter.value = 1
+  scrollUp()
 }
 
 onMounted(async () => {
   sessionStore.fetchGenres()
+  getMovies()
 })
 
-watch(sessionStore, () => {
-  getMovies()
+watch(startFetch, () => {
+  if(startFetch.value) {
+    getMovies()
+    sessionStore.toggleFetch()
+    scrollUp()
+  }
 })
 </script>
 <template>
   <section class="mb-4 hidden sm:block">
-    <CustomSelect :options="sessionStore.genres" @onToggleOption="onToggleOption" />
+    <CustomSelect :options="genres" @onToggleOption="onToggleOption" />
   </section>
 
-  <CustomSelectMobile :options="sessionStore.genres" />
+  <section class="mb-12 sm:hidden block">
+    <CustomSelectMobile 
+      :options="genres" 
+      @onToggleOption="onToggleOption"
+      @onApplyFilter="onApplyFilter"
+    />
+  </section>
 
   <section class="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
     <article 
@@ -51,4 +95,6 @@ watch(sessionStore, () => {
     </router-link>
     </article>
   </section>
+  <ScrollUpButton />
+  <div v-if="movies?.results" ref="scrollDetector"></div>
 </template>

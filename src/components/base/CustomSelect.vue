@@ -8,8 +8,9 @@ defineProps<{
 }>()
 
 function toggleOption(id: number) {
-  emit('onToggleOption', id)
+  emit('onToggleOption', id, true)
 }
+
 </script>
 <template>
   <ul class="flex justify-center flex-wrap">
@@ -17,8 +18,8 @@ function toggleOption(id: number) {
       v-for="option in options"
       :key="option.id"
       @click="toggleOption(option.id)"
-      class="text-center mx-4 my-1 px-6 py-2 rounded-md cursor-pointer hover:bg-red-200 hover:text-black"
-      :class="option.isActive ? 'bg-blue-500' : 'bg-red-800'"
+      class="text-center mx-4 my-1 px-6 py-2 rounded-md cursor-pointer hover:bg-red-200 hover:text-black shadow-lg"
+      :class="!option.isActive ? 'bg-gray-800' : 'bg-red-800'"
     >
       {{ option.name }}
     </li>

@@ -11,8 +11,8 @@ function toggle() {
 </script>
 
 <template>
-  <header class="container mx-auto sticky top-0 sm:static sm:bg-transparent bg-red-800 shadow-md sm:shadow-none">
-    <nav class="w-full py-4">
+  <header class="container mx-auto sticky top-0 sm:static shadow-md sm:shadow-none">
+    <nav class="w-full py-4 sm:bg-transparent bg-red-800">
       <div class="hidden justify-between w-full sm:flex px-4">
         <RouterLink to="/" class="text-red-800 hover:text-white font-bold text-lg">Home</RouterLink>
         <RouterLink to="/login" class="text-red-800 hover:text-white font-bold text-lg">Login</RouterLink>
@@ -23,11 +23,11 @@ function toggle() {
           class="h-8 w-8 block sm:hidden mx-4"
           @click="toggle"
         >
-        <ul v-if="showMenu" class="fixed w-full bg-red-800/80 p-4">
-          <li class="my-2">
+        <ul v-if="showMenu" class="fixed top-16 w-full shadow-xl">
+          <li class="py-2 pl-4 bg-red-800/40">
             <RouterLink to="/" class="font-bold">Home</RouterLink>
           </li>
-          <li class="my-2">
+          <li class="py-2 pl-4 bg-red-800/40">
             <RouterLink to="/login" class="font-bold">Login</RouterLink>
           </li>
         </ul>

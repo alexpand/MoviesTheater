@@ -5,7 +5,7 @@ import { useUrlHandler } from '@/composables/utils'
 import { useSessionStore } from '@/stores/session'
 
 const params =
-  '?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'
+  '?include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc'
 
 export default function useMoviesService(): MovieService {
   const { headers, buildUrl } = useUrlHandler()
@@ -30,9 +30,9 @@ export default function useMoviesService(): MovieService {
     genres.value = await response.json()
   }
 
-  async function getMovies(): Promise<void> {
+  async function getMovies(page?: number | undefined): Promise<void> {
     const response = await fetch(
-      buildUrl('/movie', '/discover') + params + `&with_genres=${sessionStore.genresList}`,
+      buildUrl('/movie', '/discover') + params + `&with_genres=${sessionStore.genresList}&page=${page || 1}`,
       headers
     )
     movies.value = await response.json()

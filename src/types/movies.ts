@@ -78,7 +78,7 @@ export interface MovieService {
   movies: Ref<apiMovieType | undefined>
   genres: Ref<apiGenreType | undefined>
   movie_details: Ref<apiMovieDetailsType | undefined>
-  getMovies: () => Promise<void>
+  getMovies: (page?: number | undefined) => Promise<void>
   getGenres: () => Promise<void>
   getDetails: (id: string) => Promise<void>
 }
