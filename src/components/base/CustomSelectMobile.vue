@@ -26,9 +26,7 @@ function onApplyFilter() {
 
 </script>
 <template>
-  <div 
-    class="fixed left-0 top-16 w-full py-4 flex flex-col gap-4 rounded-b-lg z-20" 
-  >
+  <div class="fixed bg-black/80 left-0 top-16 w-full py-4 flex flex-col gap-4 rounded-b-lg z-20">
     <button @click="toggleMenu" class="block mx-auto relative">
       <img class="h-8 w-8" src="/filter.svg">
     </button>
