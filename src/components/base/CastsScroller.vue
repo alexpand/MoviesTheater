@@ -1,13 +1,20 @@
 <script lang="ts" setup>
 import type { Cast } from '@/types/casts'
 
+import { computed } from 'vue'
+
 import { useUrlHandler } from '@/composables/utils'
+
+const props = defineProps<{
+  casts: Array<Cast> | undefined
+}>()
 
 const { getPosterUrl } = useUrlHandler()
 
-defineProps<{
-  casts: Array<Cast> | undefined
-}>()
+const previewCast = computed( () => {
+  return props.casts ? props.casts.slice(0,9) : []
+})
+
 </script>
 
 <template>
@@ -15,7 +22,7 @@ defineProps<{
     <div v-if="!casts">Loading</div>
     <div
       class="movie-item flex items-center flex-col rounded-lg bg-red-800 cursor-pointer hover:bg-red-100 hover:text-black hover:contrast-50 w-40 min-w-40"
-      v-for="cast in casts"
+      v-for="cast in previewCast"
       :key="`cast-${cast.id}`"
     >
       <router-link :to="`/person/${cast.id}`" class="w-full">
