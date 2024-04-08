@@ -9,6 +9,7 @@ import { useUrlHandler } from '@/composables/utils'
 
 import CustomSelect from '@/components/base/CustomSelect.vue'
 import CustomSelectMobile from '@/components/base/CustomSelectMobile.vue'
+import ScrollUpButton from '@/components/base/ScrollUpButton.vue'
 
 const { getMovies, movies } = useMoviesService()
 const { getPosterUrl } = useUrlHandler()
@@ -72,4 +73,5 @@ watch(startFetch, () => {
     </router-link>
     </article>
   </section>
+  <ScrollUpButton />
 </template>
