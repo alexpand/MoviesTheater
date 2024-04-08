@@ -32,6 +32,7 @@ const { stop } = useIntersectionObserver(
     if(isIntersecting) {
       pageCounter.value += 1
       getMovies(pageCounter.value)
+      scrollUp()
     }
   },
 )

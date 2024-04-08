@@ -30,9 +30,9 @@ export default function useMoviesService(): MovieService {
     genres.value = await response.json()
   }
 
-  async function getMovies(page: number | undefined = 1): Promise<void> {
+  async function getMovies(page?: number | undefined): Promise<void> {
     const response = await fetch(
-      buildUrl('/movie', '/discover') + params + `&with_genres=${sessionStore.genresList}&page=${page}`,
+      buildUrl('/movie', '/discover') + params + `&with_genres=${sessionStore.genresList}&page=${page || 1}`,
       headers
     )
     movies.value = await response.json()
