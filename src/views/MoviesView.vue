@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { onMounted, watch } from 'vue'
+import { onMounted, watch, ref } from 'vue'
 
 import { useSessionStore } from '@/stores/session'
 import { storeToRefs } from 'pinia'
+
+import { useIntersectionObserver } from '@vueuse/core'
 
 import { useMoviesService } from '@/composables/services'
 import { useUrlHandler } from '@/composables/utils'
@@ -21,6 +23,19 @@ const { scrollUp } = useGlobalHelper()
 
 const { startFetch, genres } = storeToRefs(sessionStore)
 
+const pageCounter = ref(1)
+const scrollDetector = ref(null)
+
+const { stop } = useIntersectionObserver(
+  scrollDetector,
+  ([{ isIntersecting }], observerElement) => {
+    if(isIntersecting) {
+      pageCounter.value += 1
+      getMovies(pageCounter.value)
+    }
+  },
+)
+
 function onToggleOption(id: number, toggleFetch: boolean) {
   sessionStore.toggleGenre(id)
   if(toggleFetch) {
@@ -30,6 +45,8 @@ function onToggleOption(id: number, toggleFetch: boolean) {
 
 function onApplyFilter() {
   sessionStore.toggleFetch()
+  pageCounter.value = 1
+  scrollUp()
 }
 
 onMounted(async () => {
@@ -78,4 +95,5 @@ watch(startFetch, () => {
     </article>
   </section>
   <ScrollUpButton />
+  <div v-if="movies?.results" ref="scrollDetector"></div>
 </template>
