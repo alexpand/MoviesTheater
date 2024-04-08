@@ -21,11 +21,14 @@ function toggleOption(id: number) {
 
 function onApplyFilter() {
   emit('onApplyFilter')
+  toggleMenu()
 }
 
 </script>
 <template>
-  <div class="fixed left-0 w-full bg-black/80 top-16 py-4 flex flex-col gap-4 rounded-b-lg">
+  <div 
+    class="fixed left-0 top-16 w-full py-4 flex flex-col gap-4 rounded-b-lg z-20" 
+  >
     <button @click="toggleMenu" class="block mx-auto relative">
       <img class="h-8 w-8" src="/filter.svg">
     </button>
@@ -35,7 +38,7 @@ function onApplyFilter() {
           v-for="option in options"
           :key="option.id"
           class="p-2 rounded-lg text-center"
-          :class="option.isActive ? 'bg-blue-500' : 'bg-red-800'"
+          :class="!option.isActive ? 'bg-gray-800' : 'bg-red-800'"
           @click="toggleOption(option.id)"
         >
           {{ option.name }}
@@ -44,4 +47,5 @@ function onApplyFilter() {
       <button @click="onApplyFilter" class="block py-2 bg-red-800 rounded-lg mx-auto w-32">Apply filters</button>
     </div>
   </div>
+  <div v-if="showMenu" class="fixed top-0 left-0 bg-black/80 h-lvh w-full z-10" @click="toggleMenu"></div>
 </template>
