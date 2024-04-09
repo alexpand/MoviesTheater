@@ -21,22 +21,21 @@ function onSubmit() {
 </script>
 
 <template>
-  <h1>Login</h1>
-  <div class="container mx-auto">
+  <div class="container mx-auto mt-20%">
     <Form
-      class="text-black text-lg flex flex-col justify-center bg-white rounded-lg p-4 gap-2 w-48 mx-auto"
+      class="text-black text-lg flex flex-col justify-center bg-red-800 rounded-lg p-4 gap-2 w-72 mx-auto"
       @submit="onSubmit"
       :validation-schema="userSchema"
     >
-      <label for="email">Email:</label>
-      <Field class="bg-stone-100 rounded-md px-2 pb-1" type="email" name="email" />
+      <label for="email" class="text-white">Email:</label>
+      <Field class="bg-gray-800 rounded-md px-2 pb-1 text-white" type="email" name="email" />
       <ErrorMessage name="email" />
 
-      <label for="password">Password:</label>
-      <Field class="bg-stone-100 rounded-md px-2 pb-1" type="password" name="password" />
+      <label for="password" class="text-white">Password:</label>
+      <Field class="bg-gray-800 rounded-md px-2 pb-1" type="password" name="password" />
       <ErrorMessage name="password" />
 
-      <button class="rounded-lg bg-stone-300 w-24 mx-auto px-2 py-1">Login</button>
+      <button class="rounded-lg bg-gray-800 w-24 mx-auto px-2 py-1 text-white font-semibold">Login</button>
     </Form>
   </div>
 </template>

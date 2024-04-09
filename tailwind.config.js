@@ -8,6 +8,9 @@ export default {
     extend: {
       'height': {
         '136': '36rem',
+      },
+      'margin': {
+        '20%': '20%'
       }
     },
   },
