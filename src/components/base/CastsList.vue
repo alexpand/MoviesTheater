@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-4">
     <CastsCard v-for="employee in list" :key="employee.name" :employee="employee" />
   </div>
 </template>

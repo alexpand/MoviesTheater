@@ -23,17 +23,16 @@ function crewByDept(dept: string) {
 </script>
 
 <template>
-  <h1>Casts view</h1>
-  <section v-if="departments" class="flex justify-between">
+  <section v-if="departments" class="flex justify-between flex-col sm:flex-row gap-12">
     <article>
-      Cast
+      <h1 class="text-2xl font-bold mb-4">Cast</h1>
       <CastsList :list="sessionStore.castsList?.cast" />
     </article>
     <article>
-      Crew
+      <h1 class="text-2xl font-bold mb-4">Crew</h1>
       <template v-for="department in departments" :key="department">
         <div v-if="crewByDept(department).length" class="mb-4">
-          <h3 class="mb-2">{{ department }}</h3>
+          <h2 class="mt-8 mb-4 text-xl">{{ department }}</h2>
           <CastsList :list="crewByDept(department)" />
         </div>
       </template>

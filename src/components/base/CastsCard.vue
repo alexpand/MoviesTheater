@@ -11,15 +11,15 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex items-center">
     <img
-      class="w-12 h-12 mr-2"
+      class="w-20 min-w-20 h-20 min-h-20 mr-2 rounded-md shadow-lg"
       :src="getPosterUrl(employee.avatar, 'w138_and_h175_face')"
       :alt="employee.name"
       onerror="this.src='/default_profile.png'"
     />
     <div>
-      <p>{{ employee.name }}</p>
+      <p class="text-lg">{{ employee.name }}</p>
       <p>{{ employee.role }}</p>
     </div>
   </div>
